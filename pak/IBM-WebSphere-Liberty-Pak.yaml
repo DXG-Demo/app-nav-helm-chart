@@ -1,0 +1,3 @@
+pakName: IBM-WebSphere-Liberty-Pak.yaml
+charts:
+  - ibm-websphere-liberty

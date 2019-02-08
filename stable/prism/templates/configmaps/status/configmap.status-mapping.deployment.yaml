@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prism.status-mapping.deployment
+  namespace: prism 
+data:
+  algorithm: "function getStatus(status) {
+    var statusJson = JSON.parse(status);
+    var statusColor = 'RED';
+    
+    var replicas = statusJson.replicas;
+    var available = statusJson.availableReplicas;
+    if (!available) available = 0;
+
+    var statusText = 'Problem';
+
+    if (replicas == available) {
+      statusColor = 'GREEN';
+      statusText = 'Normal';
+    }
+    if (available == 0) {
+      statusColor = 'RED';
+    } else if (replicas > available) {
+      statusColor = 'YELLOW';
+      statusText = 'Warning';
+    }
+    var statusFlyover = '\"Desired: ' + replicas + ', Available: ' + available + '\"';
+    return '{ color: ' + statusColor + ', text: ' + statusText + ', flyover: ' + statusFlyover + ' }';
+  }"  

@@ -1,0 +1,28 @@
+###############################################################################
+# Licensed Materials - Property of IBM.
+# Copyright IBM Corporation 2019. All Rights Reserved.
+# U.S. Government Users Restricted Rights - Use, duplication or disclosure
+# restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# Contributors:
+#  IBM Corporation - initial API and implementation
+###############################################################################
+
+{{- if eq .Values.env.kubeEnv "icp" }}
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+ name: "{{ .Chart.Name }}-certs"
+spec:
+ # name of the tls secret to store
+ # the generated certificate/key pair
+ secretName: "{{ .Chart.Name }}-certs"
+ issuerRef:
+   name: icp-ca-issuer
+   # ClusterIssuers can be referenced
+   # by changing the kind here.
+   # the default value is Issuer (i.e.
+   # a locally namespaced Issuer)
+   kind: ClusterIssuer
+ commonName: "prism-service"
+{{- end }}

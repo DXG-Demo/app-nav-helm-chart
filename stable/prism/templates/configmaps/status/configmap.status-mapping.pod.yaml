@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: prism.status-mapping.pod
+  namespace: prism 
+data:
+  algorithm: 
+    "function getStatus(status) {
+      var statusJson = JSON.parse(status);
+      var statusColor = 'RED';
+      var statusText = 'Problem';
+      var statusFlyover = '';
+      var phase = statusJson.phase;
+      if (phase == 'Running') {
+        statusColor = 'GREEN';
+        statusText = 'Normal';
+        statusFlover = 'Running';
+      } else if (phase == 'Succeeded') {
+        statusColor = 'GREEN';
+        statusText = 'Normal';
+        statusFlover = 'Completed';
+      } else if (phase == 'Pending') {
+        statusColor = 'YELLOW';
+        statusText = 'Warning';
+        if (statusJson.containerStatuses[0] && statusJson.containerStatuses[0].state && statusJson.containerStatuses[0].state.waiting !== undefined && statusJson.containerStatuses[0].state.waiting.reason) {
+          statusFlyover = statusJson.containerStatuses[0].state.waiting.reason;
+        } else {
+          statusFlyover = '';
+        }
+      } else {
+        statusColor = 'RED';
+        statusText = 'Problem';
+        statusFlyover = '';
+      }
+      return '{ color: ' + statusColor + ', text: ' + statusText + ', flyover: \"' + statusFlyover + '\"}';
+    }"

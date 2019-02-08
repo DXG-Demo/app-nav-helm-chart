@@ -1,0 +1,63 @@
+###############################################################################
+# Licensed Materials - Property of IBM.
+# Copyright IBM Corporation 2019. All Rights Reserved.
+# U.S. Government Users Restricted Rights - Use, duplication or disclosure
+# restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# Contributors:
+#  IBM Corporation - initial API and implementation
+###############################################################################
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prism.actions.deployment-liberty
+  namespace: prism
+  labels:
+data:
+  url-actions: |
+    [  
+      {
+        "name":"edit",
+        "text":"Edit Liberty",
+        "description":"Edit Liberty Configuration",
+        "url-pattern":"LIBERTY_SERVICE_URL/adminCenter/#explore/serverConfig",
+        "open-window": "tab"
+      },  
+      {
+        "name":"monitor",
+        "text":"Monitor",
+        "description":"Monitor Liberty",
+        "url-pattern":"LIBERTY_SERVICE_URL/adminCenter/#explore/monitor",
+        "open-window": "tab"
+      },  
+      {
+        "name":"klog",
+        "text":"View Kibana Logs",
+        "description":"View Kibana logs",
+        "url-pattern":"${snippet.create_kibana_log_url(${builtin.kibana-url},${resource.$.metadata.namespace},${func.podlist()})}",
+        "open-window": "tab"
+      }
+    ]
+  snippets: |
+    {
+      "create_kibana_log_url": "function createKibanaLogUrl(kibanaUrl, namespace, json) 
+                                { var timeSlot = '15m';
+                                  var pods = JSON.parse(json).pods;
+                                  var podsString = '';
+                                  var matchPhrases = '';
+                                  pods.map( function(nextPod) {
+                                    if(podsString.length>0) podsString = podsString + ',';
+                                    if(matchPhrases.length>0) matchPhrases = matchPhrases + ',';
+                                    podsString = podsString + '%7B%22term%22:%7B%22kubernetes.pod.keyword%22:%22' + nextPod +'%22%7D%7D';
+                                    matchPhrases = matchPhrases + '(term:(kubernetes.pod.keyword:' + nextPod + '))'
+                                  })
+                                  return kibanaUrl 
+                                      + \"#/dashboard/Liberty-Problems-K5-20180628?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:now-\"
+                                      + timeSlot
+                                      + \",mode:quick,to:now))&_a=(description:'',filters:!(('$state':(store:appState),meta:(alias:'pod%20filter',disabled:!f,index:'logstash-*',key:query,negate:!f,type:custom,value:'%7B%22bool%22:%7B%22minimum_should_match%22:1,%22should%22:%5B\" 
+                                      + podsString 
+                                      + \"%5D%7D%7D'),query:(bool:(minimum_should_match:1,should:!(\"
+                                      + matchPhrases 
+                                      + \"))))),options:(darkTheme:!f),panels:!((col:1,id:liberty_probleminfo,panelIndex:1,row:1,size_x:12,size_y:1,type:visualization),(col:1,id:liberty_topMessageIds,panelIndex:5,row:4,size_x:12,size_y:3,type:visualization),(col:1,id:liberty_messageGraph,panelIndex:6,row:7,size_x:4,size_y:2,type:visualization),(col:9,id:liberty_ffdcGraph,panelIndex:7,row:7,size_x:4,size_y:2,type:visualization),(col:5,id:liberty_traceGraph,panelIndex:8,row:7,size_x:4,size_y:2,type:visualization),(col:1,columns:!(loglevel,module,message,ibm_sequence),id:liberty_traceSearch,panelIndex:16,row:13,size_x:12,size_y:4,sort:!(ibm_sequence.keyword,desc),type:search),(col:1,columns:!(loglevel,module,message,ibm_sequence),id:liberty_messageSearch,panelIndex:17,row:9,size_x:12,size_y:4,sort:!(ibm_sequence.keyword,desc),type:search),(col:1,columns:!(ibm_className,ibm_probeID,ibm_exceptionName,ibm_sequence),id:liberty_ffdcSearch,panelIndex:18,row:17,size_x:12,size_y:4,sort:!(ibm_sequence.keyword,desc),type:search),(col:1,id:b1afa090-c266-11e8-b344-7d7a26e293da,panelIndex:19,row:2,size_x:4,size_y:2,type:visualization),(col:5,id:c1f2fce0-c266-11e8-b344-7d7a26e293da,panelIndex:20,row:2,size_x:4,size_y:2,type:visualization),(col:9,id:d29457b0-c266-11e8-b344-7d7a26e293da,panelIndex:21,row:2,size_x:4,size_y:2,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'*')),timeRestore:!t,title:Liberty-Problems-K5-20180912,uiState:(P-19:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-20:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-21:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-6:(vis:(colors:(AUDIT:%233F2B5B,INFO:%237EB26D,SEVERE:%23BF1B00,WARNING:%23F2C96D)))),viewMode:view)\";
+                                }"
+    }

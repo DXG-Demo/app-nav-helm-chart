@@ -1,0 +1,4 @@
+image:
+  repositoryInit: wasliberty-liber8-docker.artifactory.swg-devops.com/prism-docker/prism-init 
+env:
+  kubeEnv: icp

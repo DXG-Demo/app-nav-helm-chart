@@ -1,0 +1,29 @@
+# This yaml file contains options to ignore or reduce the severity specific cv 
+# lint messages using regular expression to match on message text.  
+#
+# Ignored message: '\[ERROR\] Parameter is defined but never used in a template.*'
+# Reason: WebSphere Liberty Helm Chart uses Shared Liberty Templates (SLT), which uses  
+#         the defined parameters, so this message can be safely ignored.
+#
+# Ignored message: '\[ERROR\] Missing recommended metering labels.*'
+# Reason: WebSphere Liberty Helm Chart uses Shared Liberty Templates (SLT) to get common templats, and 
+#         SLT already has those metering annotations, so this message can be safely ignored.
+#
+# Ignored message: '\[WARNING\] Description is too long.*'
+# Reason: The long description is needed to give users meaningful information. Verified that even 
+#         the longest meesage we have is rendered correctly by UI. So this message can be safely ignored.
+#
+# Reduced Error to Warning: '\[ERROR\] Missing livenessProbe: livenessProbe not found.*'
+# Reason: We added livenessProbe but then it resulted in weird behaviours, so reversed changes (https://github.ibm.com/WASCloudPrivate/roadmap/issues/413). 
+#         Liberty server itself may not have the mechanism to check liveness. So this may require major design and can’t be done at this point. 
+#         There are few workitems already opened for this: https://github.ibm.com/WASCloudPrivate/roadmap/issues/421 
+#                                                          https://github.ibm.com/WASCloudPrivate/roadmap/issues/328
+#
+#
+ignoreMessages:
+  - '\[ERROR\] .*'
+  - '\[WARNING\] .*'
+
+reduceMessages:
+  - match: '\[ERROR\] Missing livenessProbe: livenessProbe not found.*'
+    reduceTo: WARNING

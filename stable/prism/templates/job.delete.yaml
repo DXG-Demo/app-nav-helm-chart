@@ -1,0 +1,36 @@
+###############################################################################
+# Licensed Materials - Property of IBM.
+# Copyright IBM Corporation 2019. All Rights Reserved.
+# U.S. Government Users Restricted Rights - Use, duplication or disclosure
+# restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# Contributors:
+#  IBM Corporation - initial API and implementation
+###############################################################################
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: prism-delete
+  annotations:
+    "helm.sh/hook": pre-delete
+    "helm.sh/hook-delete-policy": hook-succeeded
+  labels:
+spec:
+  template:
+    metadata:
+      name: prism-init
+      annotations:
+        sidecar.istio.io/inject: "false"
+      labels:
+    spec:
+      containers:
+      - name: prism-init
+        image: "{{ .Values.image.repositoryInit }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env: 
+        - name: HOOK_MODE
+          value: predelete
+        - name: KUBE_ENV
+          value: {{ .Values.env.kubeEnv }}
+      restartPolicy: Never

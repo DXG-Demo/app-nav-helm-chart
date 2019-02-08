@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: prism.status-mapping.unregistered
+  namespace: prism 
+data:
+  exists: |
+    {  
+      "color": "GREEN",
+      "text": "Normal",
+      "flyover": "Normal"
+    }

@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: prism.status-mapping.was-nd-app
+  namespace: prism 
+data:
+  simple: | 
+    {
+        "running": {
+            color: "GREEN",
+            text: "Normal",
+            flyover: "Running"
+        },
+        "unknown": { 
+            color: "YELLOW", 
+            text: "Warning",
+            flyover: "Unknown"
+        },
+        "stopped": { 
+            color: "RED",
+            text: "Problem",
+            flyover: "Stopped"
+        }
+    }
