@@ -3,7 +3,7 @@
 
 ## Installation
 
-Clone the repository.
+Clone this repository.
 
 ### Installation for IBM Cloud Private
 
@@ -11,7 +11,7 @@ Prereq: Install ICP CLI. https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.
 
 Install the application navigator helm chart
 
-`helm install --name=application-navigator --namespace=prism helm-chart-prism/stable/prism`
+`helm install --name=application-navigator --namespace=prism app-nav-helm-chart/stable/prism --tls`
 
 From IBM Cloud Private UI navigate to Network Access > Services > Prism.  The application navigator UI link will show up as the first link under Node port. 
 
@@ -19,7 +19,7 @@ From IBM Cloud Private UI navigate to Network Access > Services > Prism.  The ap
 
 Install the application navigator helm chart
 
-`helm install --name=application-navigator --namespace=prism --set env.kubeEnv=minikube --set service.port=9080 --set service.targetPort=9080 --set service.scheme=HTTP --set env.target=http://localhost:9080 helm-chart-prism/stable/prism`
+`helm install --name=application-navigator --namespace=prism --set env.kubeEnv=minikube --set service.port=9080 --set service.targetPort=9080 --set service.scheme=HTTP --set env.target=http://localhost:9080 app-nav-helm-chart/stable/prism --tls`
 
 To find the Application Navigator UI port, locate the prism service.  The application navigator port is the external port match for the internal port 3000.  
 
