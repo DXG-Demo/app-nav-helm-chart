@@ -41,7 +41,9 @@ The list of applications in the Application Navigator UI will be empty at first.
 
 ## Uninstall
 
-helm delete application-navigator --purge
+On ICP:  helm delete application-navigator --purge --tls 
+
+On Minikube:  helm delete application-navigator --purge
 
 ## Troubleshooting
 
