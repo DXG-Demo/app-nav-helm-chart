@@ -29,7 +29,7 @@ From IBM Cloud Private UI navigate to Workload > Deployments > Prism.  Click the
 
 Install the application navigator via helm chart
 
-`helm install --name=application-navigator --namespace=prism --set env.kubeEnv=minikube --set service.port=9080 --set service.targetPort=9080 --set service.scheme=HTTP --set env.target=http://localhost:9080 app-nav-helm-chart/stable/prism --tls`
+`helm install --name=application-navigator --namespace=prism --set env.kubeEnv=minikube --set service.port=9080 --set service.targetPort=9080 --set service.scheme=HTTP --set env.target=http://localhost:9080 app-nav-helm-chart/stable/prism`
 
 Launch Application Navigator UI using command:  'minikube service prism -n prism'. 
 
