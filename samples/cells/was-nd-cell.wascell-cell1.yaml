@@ -1,0 +1,13 @@
+apiVersion: prism.io/v1beta1
+kind: WAS-ND-Cell
+metadata: 
+    name: wascell-cell1
+    namespace: prism 
+    labels:
+        platform: WASND
+        solution: stock-trader
+spec:
+  host: "9.57.4.23"
+  https_port: 9043
+  soap_port: 8879 
+  credentials: "wascell-cell1"

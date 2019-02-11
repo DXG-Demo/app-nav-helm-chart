@@ -1,0 +1,9 @@
+apiVersion: seed.ibm.com/v1
+kind: CloudService
+metadata:
+  name: bookinfo-translator
+  labels:
+    app: {{ .Values.BookInfoLabel }}
+spec:
+  service: language_translator
+  plan: lite

@@ -1,0 +1,6 @@
+BookInfoLabel: bookinfo
+DetailsLabel: details
+ProductPageLabel: productpage
+RatingsLabel: ratings
+ReviewsLabel: reviews
+ProductPagePortType: NodePort

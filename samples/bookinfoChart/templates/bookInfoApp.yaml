@@ -1,0 +1,19 @@
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: "bookinfo"
+  labels:
+    app: {{ .Values.BookInfoLabel }}
+spec:
+  selector:
+    matchExpressions:
+      - {key: app, operator: In, values: [{{ .Values.ProductPageLabel }}, {{ .Values.DetailsLabel }}, {{ .Values.RatingsLabel }}, {{ .Values.ReviewsLabel }}, {{ .Values.BookInfoLabel }}]} 
+  componentKinds:
+    - group: apps
+      kind: Application
+    - group: apps
+      kind: NetworkPolicy
+    - group: apps
+      kind: CloudService
+    - group: apps
+      kind: Ingress

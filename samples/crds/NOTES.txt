@@ -1,0 +1,5 @@
+application.yaml is taken from: 
+
+https://github.com/kubernetes-sigs/application
+
+A local copy is here for convenience and to correct an error in the 'owner' part of the definition.

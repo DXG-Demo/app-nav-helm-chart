@@ -1,0 +1,12 @@
+apiVersion: prism.io/v1beta1
+kind: WAS-ND-App
+metadata: 
+    name: inventory 
+    labels:
+        platform: WASND 
+        solution: stock-trader
+    annotations: { 
+        prism.subkind: WAS-ND-App,
+        prism.platform.kind: WAS-ND-Cell,
+        prism.platform.name: Dev
+    }

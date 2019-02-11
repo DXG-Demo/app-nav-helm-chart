@@ -1,0 +1,9 @@
+apiVersion: seed.ibm.com/v1
+kind: ApplicationDependency
+metadata: 
+    name: product-to-details
+    labels:
+      app: {{ .Values.ProductPageLabel }}
+spec: 
+  source: product-app
+  destination: details-app

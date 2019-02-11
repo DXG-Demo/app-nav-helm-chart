@@ -1,0 +1,9 @@
+apiVersion: seed.ibm.com/v1
+kind: ApplicationDependency
+metadata: 
+    name: product-to-reviews
+    labels:
+      app: {{ .Values.ProductPageLabel }}
+spec: 
+  source: productpage-app
+  destination: reviews-app

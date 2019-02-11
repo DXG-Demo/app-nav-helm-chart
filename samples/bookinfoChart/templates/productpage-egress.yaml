@@ -1,0 +1,36 @@
+####################################
+# NetworkPolicy for product page service denies all egress except to:
+#    - all pods in kube-system (dns required)
+#    - all pods in istio-system ( required)
+#    - all pods in the details service
+#    - all pods in the reviews service
+####################################
+apiVersion: extensions/v1beta1
+kind: NetworkPolicy
+metadata:
+  name: productpage-egress
+  labels:
+    app: {{ .Values.BookInfoLabel }}  
+spec:
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kube-system: ns
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          istio-system: ns
+  - to:
+    - podSelector:
+        matchLabels:
+          app: details
+  - to:
+    - podSelector:
+        matchLabels:
+          app: reviews
+  podSelector:
+    matchLabels:
+      app: productpage
+  policyTypes:
+  - Egress

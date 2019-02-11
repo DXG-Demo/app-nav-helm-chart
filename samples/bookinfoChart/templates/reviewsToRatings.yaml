@@ -1,0 +1,9 @@
+apiVersion: seed.ibm.com/v1
+kind: ApplicationDependency
+metadata: 
+    name: reviews-to-ratings
+    labels:
+      app: {{ .Values.ReviewsLabel }}
+spec: 
+  source: reviews-app
+  destination: ratings-app
