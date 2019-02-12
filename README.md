@@ -67,5 +67,5 @@ If Application Navigator fails to uninstall you may need to delete the following
 
 If you find either of these jobs after you have issued the helm command to uninstall application navigator, delete them with the following command: 
 
-`kubectl delete job \<job-name\> -n prism`
+`kubectl delete job <job-name> -n prism`
 
