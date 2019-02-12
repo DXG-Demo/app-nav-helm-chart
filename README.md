@@ -39,13 +39,19 @@ The list of applications in the Application Navigator UI will be empty at first.
 
 `kubectl apply -f samples/crds`
 
-`helm install --name=stocktrader samples/stocktraderChart`
+`helm install --name=stock-trader samples/stocktraderChart`
 
 ## Uninstall
 
-On ICP:  helm delete application-navigator --purge --tls 
+### On ICP:  
 
-On Minikube:  helm delete application-navigator --purge
+1. helm delete application-navigator --purge --tls 
+1. helm delete stock-trader --purge --tls 
+
+### On Minikube:  
+
+1. helm delete application-navigator --purge
+1. helm delete stock-trader --purge
 
 ## Troubleshooting
 
