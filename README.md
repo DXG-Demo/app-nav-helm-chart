@@ -1,6 +1,6 @@
 # Application Navigator Helm Chart
 
-Application Navigator [Documentation](https://github.com/WASdev/app-nav-helm-chart/wiki)
+Application Navigator [Documentation](https://github.com/WASdev/app-nav-helm-chart/wiki).
 
 ## Installation
 
