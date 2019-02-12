@@ -51,13 +51,13 @@ The list of applications in the Application Navigator UI will be empty at first.
 
 ### On ICP:  
 
-1. helm delete application-navigator --purge --tls 
-1. helm delete stock-trader --purge --tls 
+1. `helm delete application-navigator --purge --tls`
+1. `helm delete stock-trader --purge --tls` 
 
 ### On Minikube:  
 
-1. helm delete application-navigator --purge
-1. helm delete stock-trader --purge
+1. `helm delete application-navigator --purge`
+1. `helm delete stock-trader --purge`
 
 ## Troubleshooting
 
