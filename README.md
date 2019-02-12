@@ -61,4 +61,11 @@ The list of applications in the Application Navigator UI will be empty at first.
 
 ## Troubleshooting
 
-If Application Navigator fails to uninstall you may need to delete the following jobs to complete the uninstall: prism-init-post, prism-delete.
+If Application Navigator fails to uninstall you may need to delete the following jobs to complete the uninstall: prism-init-post, prism-delete. Search for these jobs with command: 
+
+`kubectl get jobs -n prism`
+
+If you find either of these jobs after you have issued the helm command to uninstall application navigator, delete them with the following command: 
+
+`kubectl delete job \<job-name\> -n prism`
+
