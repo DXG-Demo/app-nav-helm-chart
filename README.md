@@ -37,9 +37,15 @@ Launch Application Navigator UI using command:  'minikube service prism -n prism
 
 The list of applications in the Application Navigator UI will be empty at first.  A quick way to get started will be to install a sample.
 
-`kubectl apply -f samples/crds`
+### On ICP:  
 
-`helm install --name=stock-trader samples/stocktraderChart`
+1. `kubectl apply -f samples/crds`
+1. `helm install --name=stock-trader samples/stocktraderChart --tls`
+
+### On Minikube:  
+
+1. `kubectl apply -f samples/crds`
+1. `helm install --name=stock-trader samples/stocktraderChart`
 
 ## Uninstall
 
